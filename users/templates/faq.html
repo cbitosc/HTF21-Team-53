@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&family=Nunito:ital@1&display=swap"
+        rel="stylesheet">
+    <title>Communicando Notice board</title>
+    <link rel="shortcut icon" href="assets/img/ccd-logo.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/notice-tab.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+            
+        }
+        .navbar-toggler-icon {
+  fill: red;
+}
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .wrapper {
+            background-color: #c2bfb6;
+            background: radial-gradient(#c2c1c0 8%, transparent 8%), #c2c1c0;
+            background-position: 0 0, 26px 26px;
+            background-size: 40px 40px;
+            width: 100%;
+            min-height: 100vh;
+
+            font: normal 18px/26px 'Montserrat', sans-serif;
+            ;
+            color: white;
+            padding: 100px 20px 200px;
+            box-sizing: border-box;
+        }
+
+        .block {
+            z-index: 1;
+            position: relative;
+        }
+
+        .title {
+            font: bold 42px/52px Open Sans Condensed, sans-serif;
+            text-align: center;
+            padding: 20px;
+            transition: all 0.8s ease-in-out;
+        }
+
+        .each-event {
+            background-color: #080808;
+            color: white;
+            padding: 15px;
+            margin: 80px 50px;
+            width: 60%;
+            position: relative;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .each-event:before {
+            content: "";
+            position: absolute;
+            top: calc(50% - 8px);
+            left: -27px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: white;
+            box-shadow: 0 4px 20px -4px rgba(64, 64, 64, 0.8);
+        }
+
+        .each-event:nth-child(odd) {
+            margin-left: calc(10% + 20px);
+        }
+
+        .each-event:nth-child(even) {
+            margin-left: calc(50% - 372px);
+        }
+
+        .each-event:nth-child(even):before {
+            left: calc(100% + 14px);
+        }
+
+        .title.non-focus {
+            color: white;
+            background: white;
+            margin-top: 90px;
+            transform: rotateZ(30deg);
+            transition: all 0.8s ease-in-out;
+        }
+
+        .each-event.non-focus {
+            color: white;
+            background: white;
+            margin-top: 90px;
+            transform: rotateZ(30deg);
+            transition: all 0.8s ease-in-out;
+        }
+
+        .each-event.non-focus:before {
+            opacity: 0;
+            background-color: #aaa;
+        }
+
+        .row-centered {
+            text-align: center;
+        }
+
+        .col-centered {
+            display: inline;
+            float: none;
+            text-align: left;
+            margin-right: -4px;
+        }
+
+        .scroll_up {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        @media screen and (max-width: 568px) {
+            .each-event {
+                margin: 60px 50px;
+                width: 80%;
+                display: flex;
+            }
+
+            .title.non-focus {
+                color: white;
+                background: white;
+                margin-top: 90px;
+                transform: rotateZ(10deg);
+                transition: all 0.8s ease-in-out;
+            }
+
+            .each-event.non-focus {
+                color: white;
+                background: white;
+                margin-top: 90px;
+                transform: rotateZ(10deg);
+                transition: all 0.8s ease-in-out;
+            }
+
+            .footer__content {
+                justify-items: center;
+            }
+
+        }
+
+        @media screen and (max-width: 340px) {
+            .each-event {
+                margin: 60px 50px;
+                width: 80%;
+                display: flex;
+            }
+
+            .title.non-focus {
+                color: ;
+                background: white;
+                margin-top: 90px;
+                transform: rotateZ(10deg);
+                transition: all 0.8s ease-in-out;
+            }
+
+            .each-event.non-focus {
+                color: white;
+                background: white;
+                margin-top: 90px;
+                transform: rotateZ(10deg);
+                transition: all 0.8s ease-in-out;
+            }
+
+            .footer__content {
+                justify-items: center;
+            }
+        }
+
+        .ccd_logo {
+            display: flex;
+            width: 50%;
+            height: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="collapse" id="navbarHeader" style="background-color: #c2c1c0;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-md-7 py-4">
+                        <h4 class="text-black">About us</h4>
+                        <p class="text-muted">Welcome to one of the largest, oldest and most prestigious clubs in
+                            CBIT.
+                            (And the city!)
+                            <br> An amalgamation of students with an ardent love for literature, writing and public
+                            speaking.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-light shadow-sm" style="background-color: #1d1b1a;">
+            <div class="container">
+                <h2>  </h2>
+              
+               
+
+                        <a class="navbar-toggler" type="button"style="margin-left:1000px; color:white;"  href='/login'>Login</a>
+                        <a class="navbar-toggler" type="button" style= color:white; href='/register'>Signup</a>
+                      
+                  
+
+           
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon" ></span>
+                </button>
+
+            </div>
+        </div>
+    </header>
+    <img src="https://www.countrywidevents.in/images/slide3.jpg" width="1600" height="500" >
+    <div class="wrapper">
+        <br><br><br><br><br><br><br><br>
+        <div class="row row-centered">
+            <br><br><br><br><br><br><br>
+            <section class="each-year">
+                <div class="table">
+                    <div class="title" style="font-family:'Nunito', sans-serif;"><u>FAQ</u></div>
+                   
+                    <div class="col-md-3 col-centered">
+                        <div class="each-event">
+                            <div class="event-description">On Mondays, we take time to listen to our audience's opinions on a broad set of issues worth debating over by means of polls. Alternatively, we put to test their skills through engrossing quizzes. We disclose the results the following Sunday!</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-centered">
+                        <div class="each-event">
+                            <div class="event-description">Tuesdays are reserved for the trusty Word of the Week segment, and its many extensions which serve as means to intensify your expertise in the English language.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-centered">
+                        <div class="each-event">
+                            <div class="event-description">While there is no single recipe to follow in order to become an excellent writer, we dedicate Wednesdays to hand out the best pointers we've compiled to help you improve your literary skills!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-centered">
+                        <div class="each-event">
+                            <div class="event-description">For the past two years, our much-loved segment, Humans of CBIT, brought CBIT's unsung heroes to light. This year, with its new extension, Humans of CCD, we spotlight the efforts of the quondam members of Communicando to remind us of their legacy and remind them of our love!</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-centered">
+                        <div class="each-event">
+                            <div class="event-description">Every Thursday, we dive into the richness of the Hindi language and learn new words with साप्ताहिक शब्द along with phrases to enhance our vocabulary.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-centered">
+                        <div class="each-event">
+                            <div class="event-description">Ever felt blank when you opened Netflix, entered a book store, or frolicked in your kitchen to cook? Communicando presents a new segment called, "Weekends With CCD" to enlighten you with some rich and intriguing finds of ours - mentally stimulating books, entrancing films, and easy as pie recipes. Tune in every Friday!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-centered">
+                        <div class="each-event">
+                            <div class="event-description">We also feature book, movie and song reviews written by both our team and audience on Fridays to give you new insights into works of art, to introduce you to new books and movies, or to simply enjoy reading!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-centered">
+                        <div class="each-event">
+                            <div class="event-description">On Saturdays, we take a detour to visit our roots in Telugu and pick up new words with ‘ఈ వారపు పదం’ along with phrases to strengthen our grasp over our regional language.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-centered">
+                        <div class="each-event">
+                            <div class="event-description">On Sundays, we highlight the efforts of each of our team members from the senior team with 'CCD Behind The Scenes' as a token of our appreciation, because we believe that a club is only as strong as its team members. 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section class="block">
+                <div class="each-year">
+                    <div class="title" style="font-family:'Nunito', sans-serif; color:black">EVENT OF THE MONTH-SlapDash (OCT)</div>
+                    <div class=" col-md-3 col-centered">
+                        <div class="each-event">
+                            <div class="event-description">Winner- Rishi Krishna <br> 
+                                Special Mentions- Rishi.B, Sudheshna, Tanmayi and Sarayu
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="block">
+                <div class="each-year">
+                    <div class="title" style="font-family:'Nunito', sans-serif; color:black">COMING SOON-</div>
+                  
+                    <div class=" col-md-3 col-centered">
+                        <div class="each-event">
+                            <div class="event-description">LITERATI XII- MARCH 2022</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+    <footer class="footer section" style="background-color:#050505;">
+        <div class="footer__container container grid">
+            <div class="footer__content grid">
+            </div>
+
+            <div class="container">
+                <p class="float-end mb-1">
+                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-arrow-up-square-fill" viewBox="0 0 16 16" style="color: black">
+                            <path
+                                d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z" />
+                        </svg></a>
+                </p>
+                <p class="mb-1">Gandipet, Hyderabad, Telangana, <br>PIN : 500075</p>
+                <p class="mb-0"><a class="footer__terms-link" style="text-decoration: none; color:gray">Contact us: 9491580611, 7680000300</a> </p>
+                <p> <address>
+                    Email: <a href="mailto:cbitcommunicando@gmail.com" class="footer__terms-link" style="text-decoration: none; color:gray">cbitcommunicando@gmail.com</a>.<br> </address></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+
+    <script>
+        var $element = $('.each-event, .title');
+        var $window = $(window);
+        $window.on('scroll resize', check_for_fade);
+        $(window).trigger('scroll');
+        function check_for_fade() {
+            var window_height = $window.height();
+            $.each($element, function (event) {
+                var $element = $(this);
+                var element_height = $element.outerHeight();
+                var element_offset = $element.offset().top;
+                space = window_height - (element_height + element_offset - $(window).scrollTop());
+                if (space < 60) {
+                    $element.addClass("non-focus");
+                }
+                else {
+                    $element.removeClass("non-focus");
+                }
+            });
+        };
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
